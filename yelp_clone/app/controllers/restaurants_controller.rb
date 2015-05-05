@@ -1,14 +1,20 @@
 class RestaurantsController < ApplicationController
   def index
     @restaurants = Restaurant.all
+    @new_restaurant = new_restaurant_path
   end
 
   def new
+    @restaurant = Restaurant.new
   end
 
   def create
-    Restaurant.create(restaurant_params)
+    @restaurant = Restaurant.create(restaurant_params)
+    if @restaurant.save
     redirect_to '/restaurants'
+    else
+      render 'new'
+    end
   end
 
   def restaurant_params
@@ -26,7 +32,6 @@ class RestaurantsController < ApplicationController
   def update
     @restaurant = Restaurant.find(params[:id])
     @restaurant.update(restaurant_params)
-
     redirect_to '/restaurants'
   end
 
