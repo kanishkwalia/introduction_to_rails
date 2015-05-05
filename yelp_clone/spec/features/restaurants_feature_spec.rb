@@ -68,5 +68,5 @@ feature 'restaurants' do
       expect(page).to have_content 'Restaurant deleted successfully'
     end
   end
-  
+
 end
